@@ -1,0 +1,10 @@
+.zip
+.xls
+.txt
+.pdf
+.tar
+.jpg
+.gif
+.exe
+.doc
+.png
