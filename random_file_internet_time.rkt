@@ -16,7 +16,8 @@
             
                   (cond
                       ((equal? (- r 1) 0)
-                            (printf "~a / ~a"(list-ref mime_type (- r 1)) (list-ref sub_type (- (random 1 6) 1)) ))
+                            (printf "~a / ~a"(list-ref mime_type (- r 1))
+                                    (list-ref sub_type (- (random 1 6) 1)) ))
                        (else
                             (cond
                               ((equal? (- r 1) 1)
@@ -26,7 +27,8 @@
                                        )
                                )
                               (else
-                               (printf "~a / ~a"(list-ref mime_type (- r 1)) (list-ref sub_type (- (random 9 13) 1))) )
+                               (printf "~a / ~a"(list-ref mime_type (- r 1))
+                                       (list-ref sub_type (- (random 9 13) 1))) )
                              );end of inner cond
                         );end of outer else
                     );end of outer cond
@@ -77,14 +79,14 @@
       (inherit name)
       (inherit surname )
       (inherit age)
-    (define domain '(gmail.com hotmail.com rediffmail.com yahoo.com naukri.com ))
+    (define/public (domain a) (list-ref '(gmail.com hotmail.com rediffmail.com yahoo.com naukri.com ) a))
       
     
 ; defining function to get full info
       (define (get-emailid) (printf "~a_~a_~a@~a" (string-downcase (name(-(random 1 9)1)))
                                                 (string-downcase (surname (-(random 1 10)1)))
                                                 (age)
-                                                (list-ref domain(-(random 1 6)1))
+                                                (domain(-(random 1 6)1))
                              )
       )
 ;making the function public
@@ -95,6 +97,31 @@
 
 ;end of class internet
 
+
+
+;define class int_username
+(define int_username%
+    (class internet%
+       ;initializing argument
+      
+      ; inheriting from internet class
+      (inherit age)
+      (inherit domain)
+      
+    
+    
+; defining function to get full info
+      (define/public (get-e_id u_name) (printf "~a_~a@~a" u_name
+                                                (age)
+                                                (domain(-(random 1 6)1))
+                             )
+      )
+
+   (super-new))
+    );end of class internet
+
+
+
 ;***************OUTPUTS**************
 ;use these commands to get the output
 (send (new files%) get-mime)
@@ -104,3 +131,7 @@
 (send (new person%) get-info)
 (printf " \n\nEmail id : ")
 (send (new internet%) get-emailid)
+(printf " \n\nEmail id (enter username ): ")
+(define u_name (read))
+(printf " \n ")
+(send (new int_username%) get-e_id u_name)
