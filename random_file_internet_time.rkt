@@ -51,12 +51,12 @@
      )
     (define/public (surname ra)
       (list-ref
-       '("Smith" "Jones" "Willaims" "Brown" "Davies" "Sparrow" "Wilson" "Thomas" "Robinson" "Evans")ra)
+       '("Smith" "Jones" "Williams" "Brown" "Davies" "Sparrow" "Wilson" "Thomas" "Robinson" "Evans")ra)
     )
     (define/public (age) (random 16 40))
 ; defining function to get full info
     (define (get-info)
-      (printf "Name : ~a ~a  ;  \n Age : ~a" (name(-(random 1 9)1))
+      (printf "Name : ~a ~a    \n Age : ~a" (name(-(random 1 9)1))
                                              (surname (-(random 1 10)1))
                                              (age)
        )
