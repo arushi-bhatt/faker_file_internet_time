@@ -7,7 +7,7 @@
     (define mime_type '(image video audio))
     (define sub_type '(jpeg svg xls gif png avi mp4 uvh aac adp uva aif))
 ; defining function to get full name 
-      (define (get-file_name) (printf "~a.~a"(list-ref file_name(- (random 1 11)1)) (list-ref sub_type (-(random 1 13)1))))
+      (define (get-file_name) (printf "~a.~a"(list-ref file_name(- (random 1 11) 1)) (list-ref sub_type (-(random 1 13) 1))))
 ;making the function public
       (public-final get-file_name )
 ;defining function to get mime types and accordingly their subtypes
@@ -20,7 +20,11 @@
                        (else
                             (cond
                               ((equal? (- r 1) 1)
-                               (printf "~a / ~a"(list-ref mime_type (- r 1)) (list-ref sub_type (- (random 6 9) 1))) )
+                               (printf "~a / ~a"
+                                       (list-ref mime_type (- r 1))
+                                       (list-ref sub_type (- (random 6 9) 1))
+                                       )
+                               )
                               (else
                                (printf "~a / ~a"(list-ref mime_type (- r 1)) (list-ref sub_type (- (random 9 13) 1))) )
                              );end of inner cond
@@ -39,14 +43,22 @@
 (define person%
     (class object%
     (super-new)    ;initializing lists
-    (define name '(Elizabeth Robert Will Jack Davvy Bill Mark Angelique Ketty Jaquiline ))
-    (define surname '(Smith Jones Willaims Brown Davies Sparrow Wilson Thomas Robinson Evans))
-    (define age (random 16 40))
+    (define/public (name ran)
+      (list-ref
+       '("Elizabeth" "Robert" "Will" "Jack" "Davvy" "Bill" "Mark" "Angelique" "Ketty" "Jaquiline") ran)
+     )
+    (define/public (surname ra)
+      (list-ref
+       '("Smith" "Jones" "Willaims" "Brown" "Davies" "Sparrow" "Wilson" "Thomas" "Robinson" "Evans")ra)
+    )
+    (define/public (age) (random 16 40))
 ; defining function to get full info
-      (define (get-info) (printf "Name : ~a ~a  ;  \n Age : ~a"(list-ref name(-(random 1 9)1))
-                                                                (list-ref surname (-(random 1 10)1))
-                                                                age)
-      )
+    (define (get-info)
+      (printf "Name : ~a ~a  ;  \n Age : ~a" (name(-(random 1 9)1))
+                                             (surname (-(random 1 10)1))
+                                             (age)
+       )
+    )
     
       
 ;making the function public
@@ -58,4 +70,37 @@
 
 
 
-;use this command to get the output  <   (send (new files%) get-mime)  or  (send (new files%) get-file_name) (send (new files%) get-info)  >
+;define class internet
+(define internet%
+    (class person%
+       ;initializing lists
+      (inherit name)
+      (inherit surname )
+      (inherit age)
+    (define domain '(gmail.com hotmail.com rediffmail.com yahoo.com naukri.com ))
+      
+    
+; defining function to get full info
+      (define (get-emailid) (printf "~a_~a_~a@~a" (string-downcase (name(-(random 1 9)1)))
+                                                (string-downcase (surname (-(random 1 10)1)))
+                                                (age)
+                                                (list-ref domain(-(random 1 6)1))
+                             )
+      )
+;making the function public
+      (public-final get-emailid )
+
+   (super-new))
+    )
+
+;end of class internet
+
+;***************OUTPUTS**************
+;use these commands to get the output
+(send (new files%) get-mime)
+(printf " \n ")
+(send (new files%) get-file_name)
+(printf " \n\n ")
+(send (new person%) get-info)
+(printf " \n\nEmail id : ")
+(send (new internet%) get-emailid)
